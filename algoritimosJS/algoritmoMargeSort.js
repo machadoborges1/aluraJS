@@ -2,13 +2,16 @@
 
 const listaLivros = require('./array');
 
-function mergeSort(array) {
+function mergeSort(array, nivelAninhamento = 0) {
+
+   console.log(nivelAninhamento);
+   console.log(array);
 
    if(array.length > 1) {
 
       const meio = Math.floor(array.length / 2);
-      const part1 = mergeSort(array.slice(0, meio));
-      const part2 = mergeSort(array.slice(meio, array.length));
+      const part1 = mergeSort(array.slice(0, meio), nivelAninhamento++);
+      const part2 = mergeSort(array.slice(meio, array.length), nivelAninhamento++);
       array = ordena(part1, part2);
 
 
@@ -25,13 +28,13 @@ function ordena(part1, part2){
 
    while (posicaoAtualParte1 < part1.length && posicaoAtualParte2 < part2.length) {
 
-      let prudutoAtualParte1 = part1[posicaoAtualParte1];
+      let produtoAtualParte1 = part1[posicaoAtualParte1];
       let produtoAtualParte2 = part2[posicaoAtualParte2];
 
       if (produtoAtualParte1.preco < produtoAtualParte2.preco) {
 
-         resultado.push(prudutoAtualParte1)
-         produtoAtualParte1++;
+         resultado.push(produtoAtualParte1)
+         posicaoAtualParte1++;
 
       } else {
 
@@ -47,5 +50,4 @@ function ordena(part1, part2){
    )
 }
 
-
-console.log(mergeSort(Listalivros));
+console.log(mergeSort(listaLivros));
